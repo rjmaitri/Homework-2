@@ -252,6 +252,8 @@ gent_biscoe_bill <- penguins %>%
   filter(species == "Gentoo" & island == "Biscoe") %>%
   pull(bill_length_mm)
 
+gent_biscoe_bill
+
 ```
 
 
@@ -263,20 +265,50 @@ gentoo_bill_se_mean <- replicate(10,
                              size = length(gent_biscoe_bill),
                              replace = TRUE) %>% mean)
 
+gentoo_bill_se_mean
+
 ```
 
 
 4c. Use map_df() to create a data frame with the mean and sd of different sample sizes using the first 5 through 100 values (so, n = 5:100 - smallest sample size will have the values 1-5). Make sure the sample size is included in the final data frame.
 ```{r}
+library(purrr)
 
+
+
+#map gentoo bill from biscoe values into mean and sd
+df_samp_mean_sd <- map_df(sample(gent_biscoe_bill,
+                   size = length(gent_biscoe_bill),
+                   replace = TRUE),
+#create a df with sample size, mean and sd                        
+       ~data.frame(x = .x,
+                   mean = mean(5:.x),
+                   sd = sd(5:.x)),
+                   
+                      
+       .id = "x")
+
+df_samp_mean_sd
 
 ```
 
 4d. Plot the relationship between sample size and SD and sample size versus SE of the mean. What difference do you see and why? Note, you’ll need to create a column for SE here!
 
+```{r}
+
+
+
+```
+
 +2 EC for using par() to make a two-panel plot. Don’t forget to reset back to a single plot per panel after making a two-panel plot. Otherwise things get weird.
 
 Extra Credit.
 Making beautiful tables is hard. There are a number of good packages to help you do that - and they were recently featured in this excellent article - https://rfortherestofus.com/2019/11/how-to-make-beautiful-tables-in-r/. Make a beautiful table showing the average properties of bills of penguins by species, sex, and island. Use whatever package you like. A basic nice table is worth 4 points. +1 for every additional bit of information you can convey with the table other than a nicely formatted table. Please explain what you have done to get each point. +1 for naturally incorporating each additional piece of information about properties beyond means. How visually appealing can you make this?
+
+```{r}
+library(reactable)
+
+reactable(penguins)
+```
 
 https://github.com/rjmaitri/Homework-2.git
