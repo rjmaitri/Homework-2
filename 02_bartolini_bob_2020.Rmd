@@ -15,7 +15,19 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
+#scrolling code output
 knitr::opts_chunk$set(echo = TRUE)
+options(width = 60)
+local({
+  hook_output <- knitr::knit_hooks$get('output')
+  knitr::knit_hooks$set(output = function(x, options) {
+    if (!is.null(options$max.height)) options$attr.output <- c(
+      options$attr.output,
+      sprintf('style="max-height: %s;"', options$max.height)
+    )
+    hook_output(x, options)
+  })
+})
 ```
 
 
@@ -200,9 +212,11 @@ species_body_mass_sd_median
 View(species_body_mass_sd_biscoe)
 2E Make a species-island column in penguins using paste(). This is an awesome function that takes multiple strings, and slams them together using the argument sep = to define how the string should be combined. Try out paste("Hello", "Goodbye", sep = "! ") to see how it works. Have the two be separated by _.
 
-```{r}
+```{r, max.height = '150px'}
 #concantenate species and island columns
 penguins$Species_Island <- paste(penguins$species, penguins$island, sep = "_")
+
+penguins$Species_Island
 
 ```
 
@@ -248,7 +262,7 @@ plot(flipper_length_mm ~ body_mass_g, data = penguins)
 
 ```{r}
 #create object for bill length of gentoo from bisco
-gent_biscoe_bill <- penguins %>%
+gent_biscoe_bill <- na.omit(penguins) %>%
   filter(species == "Gentoo" & island == "Biscoe") %>%
   pull(bill_length_mm)
 
@@ -271,26 +285,20 @@ gentoo_bill_se_mean
 
 
 4c. Use map_df() to create a data frame with the mean and sd of different sample sizes using the first 5 through 100 values (so, n = 5:100 - smallest sample size will have the values 1-5). Make sure the sample size is included in the final data frame.
-```{r}
+
+
+```{r, max.height = '150px'}
+
 library(purrr)
-
-
-
-#map gentoo bill from biscoe values into mean and sd
-df_samp_mean_sd <- map_df(sample(gent_biscoe_bill,
-                   size = length(gent_biscoe_bill),
-                   replace = TRUE),
-#create a df with sample size, mean and sd                        
-       ~data.frame(x = .x,
-                   mean = mean(5:.x),
-                   sd = sd(5:.x)),
-                   
-                      
-       .id = "x")
-
-df_samp_mean_sd
+gentdf <- map_df(5:100,
+            ~data.frame(sim = .x,
+                     samp_mean =  mean(gent_biscoe_bill[5:.x]),
+                               samp_sd =  sd(gent_biscoe_bill[5:.x])))
+gentdf
 
 ```
+
+
 
 4d. Plot the relationship between sample size and SD and sample size versus SE of the mean. What difference do you see and why? Note, you’ll need to create a column for SE here!
 

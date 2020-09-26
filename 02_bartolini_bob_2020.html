@@ -2128,15 +2128,16 @@ library(palmerpenguins)</code></pre>
 <pre class="r"><code>#apply the head function to the penguins dataset
 head(penguins)</code></pre>
 <pre><code>## # A tibble: 6 x 8
-##   species island bill_length_mm bill_depth_mm flipper_length_~ body_mass_g sex  
-##   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt; &lt;fct&gt;
-## 1 Adelie  Torge~           39.1          18.7              181        3750 male 
-## 2 Adelie  Torge~           39.5          17.4              186        3800 fema~
-## 3 Adelie  Torge~           40.3          18                195        3250 fema~
-## 4 Adelie  Torge~           NA            NA                 NA          NA &lt;NA&gt; 
-## 5 Adelie  Torge~           36.7          19.3              193        3450 fema~
-## 6 Adelie  Torge~           39.3          20.6              190        3650 male 
-## # ... with 1 more variable: year &lt;int&gt;</code></pre>
+##   species island bill_length_mm bill_depth_mm
+##   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Adelie  Torge~           39.1          18.7
+## 2 Adelie  Torge~           39.5          17.4
+## 3 Adelie  Torge~           40.3          18  
+## 4 Adelie  Torge~           NA            NA  
+## 5 Adelie  Torge~           36.7          19.3
+## 6 Adelie  Torge~           39.3          20.6
+## # ... with 4 more variables: flipper_length_mm &lt;int&gt;,
+## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 </div>
 <div id="c.-what-do-you-learn-by-using-str-and-summary-on-penguins" class="section level4">
 <h4>1c. What do you learn by using str() and summary() on penguins()</h4>
@@ -2154,22 +2155,30 @@ str(penguins)</code></pre>
 <p><span style="color: red;"> Str(penguins) gives a look into the structure of the dataframe “penguins”. We can see that this dataframe has 8 columns, with specie, time, location, sex and morphological data for a sample population of 344. </span></p>
 <pre class="r"><code>#apply summary function to penguins
 summary(penguins)</code></pre>
-<pre><code>##       species          island    bill_length_mm  bill_depth_mm  
-##  Adelie   :152   Biscoe   :168   Min.   :32.10   Min.   :13.10  
-##  Chinstrap: 68   Dream    :124   1st Qu.:39.23   1st Qu.:15.60  
-##  Gentoo   :124   Torgersen: 52   Median :44.45   Median :17.30  
-##                                  Mean   :43.92   Mean   :17.15  
-##                                  3rd Qu.:48.50   3rd Qu.:18.70  
-##                                  Max.   :59.60   Max.   :21.50  
-##                                  NA&#39;s   :2       NA&#39;s   :2      
-##  flipper_length_mm  body_mass_g       sex           year     
-##  Min.   :172.0     Min.   :2700   female:165   Min.   :2007  
-##  1st Qu.:190.0     1st Qu.:3550   male  :168   1st Qu.:2007  
-##  Median :197.0     Median :4050   NA&#39;s  : 11   Median :2008  
-##  Mean   :200.9     Mean   :4202                Mean   :2008  
-##  3rd Qu.:213.0     3rd Qu.:4750                3rd Qu.:2009  
-##  Max.   :231.0     Max.   :6300                Max.   :2009  
-##  NA&#39;s   :2         NA&#39;s   :2</code></pre>
+<pre><code>##       species          island    bill_length_mm 
+##  Adelie   :152   Biscoe   :168   Min.   :32.10  
+##  Chinstrap: 68   Dream    :124   1st Qu.:39.23  
+##  Gentoo   :124   Torgersen: 52   Median :44.45  
+##                                  Mean   :43.92  
+##                                  3rd Qu.:48.50  
+##                                  Max.   :59.60  
+##                                  NA&#39;s   :2      
+##  bill_depth_mm   flipper_length_mm  body_mass_g  
+##  Min.   :13.10   Min.   :172.0     Min.   :2700  
+##  1st Qu.:15.60   1st Qu.:190.0     1st Qu.:3550  
+##  Median :17.30   Median :197.0     Median :4050  
+##  Mean   :17.15   Mean   :200.9     Mean   :4202  
+##  3rd Qu.:18.70   3rd Qu.:213.0     3rd Qu.:4750  
+##  Max.   :21.50   Max.   :231.0     Max.   :6300  
+##  NA&#39;s   :2       NA&#39;s   :2         NA&#39;s   :2     
+##      sex           year     
+##  female:165   Min.   :2007  
+##  male  :168   1st Qu.:2007  
+##  NA&#39;s  : 11   Median :2008  
+##               Mean   :2008  
+##               3rd Qu.:2009  
+##               Max.   :2009  
+## </code></pre>
 <p><span style="color: red;"> Summary(penguins) gives us a statistical summary of the penguins dataset. We can see the distribution of sepcies, islands and morphological data summarised in a single table. The year and morphological data is presentend as min/max and quartiles, while the specie and island data is presented as counts. </span></p>
 </div>
 <div id="d.-what-are-the-quantiles-of-bill-depth-across-the-whole-data-set-what-do-those-quantiles-mean" class="section level4">
@@ -2307,7 +2316,181 @@ species_body_mass_sd_median &lt;- penguins %&gt;%
 ## 2 Gentoo            5000</code></pre>
 <p>View(species_body_mass_sd_biscoe) 2E Make a species-island column in penguins using paste(). This is an awesome function that takes multiple strings, and slams them together using the argument sep = to define how the string should be combined. Try out paste(“Hello”, “Goodbye”, sep = “!”) to see how it works. Have the two be separated by _.</p>
 <pre class="r"><code>#concantenate species and island columns
-penguins$Species_Island &lt;- paste(penguins$species, penguins$island, sep = &quot;_&quot;)</code></pre>
+penguins$Species_Island &lt;- paste(penguins$species, penguins$island, sep = &quot;_&quot;)
+
+penguins$Species_Island</code></pre>
+<pre style="max-height: 150px;"><code>##   [1] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+##   [3] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+##   [5] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+##   [7] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+##   [9] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+##  [11] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+##  [13] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+##  [15] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+##  [17] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+##  [19] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+##  [21] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+##  [23] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+##  [25] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+##  [27] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+##  [29] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+##  [31] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+##  [33] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+##  [35] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+##  [37] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+##  [39] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+##  [41] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+##  [43] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+##  [45] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+##  [47] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+##  [49] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+##  [51] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+##  [53] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+##  [55] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+##  [57] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+##  [59] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+##  [61] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+##  [63] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+##  [65] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+##  [67] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+##  [69] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+##  [71] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+##  [73] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+##  [75] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+##  [77] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+##  [79] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+##  [81] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+##  [83] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+##  [85] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+##  [87] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+##  [89] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+##  [91] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+##  [93] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+##  [95] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+##  [97] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+##  [99] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+## [101] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+## [103] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+## [105] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+## [107] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+## [109] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+## [111] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+## [113] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+## [115] &quot;Adelie_Biscoe&quot;    &quot;Adelie_Biscoe&quot;   
+## [117] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+## [119] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+## [121] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+## [123] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+## [125] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+## [127] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+## [129] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+## [131] &quot;Adelie_Torgersen&quot; &quot;Adelie_Torgersen&quot;
+## [133] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+## [135] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+## [137] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+## [139] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+## [141] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+## [143] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+## [145] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+## [147] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+## [149] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+## [151] &quot;Adelie_Dream&quot;     &quot;Adelie_Dream&quot;    
+## [153] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [155] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [157] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [159] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [161] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [163] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [165] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [167] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [169] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [171] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [173] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [175] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [177] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [179] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [181] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [183] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [185] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [187] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [189] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [191] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [193] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [195] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [197] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [199] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [201] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [203] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [205] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [207] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [209] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [211] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [213] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [215] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [217] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [219] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [221] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [223] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [225] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [227] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [229] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [231] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [233] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [235] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [237] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [239] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [241] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [243] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [245] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [247] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [249] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [251] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [253] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [255] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [257] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [259] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [261] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [263] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [265] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [267] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [269] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [271] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [273] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [275] &quot;Gentoo_Biscoe&quot;    &quot;Gentoo_Biscoe&quot;   
+## [277] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [279] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [281] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [283] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [285] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [287] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [289] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [291] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [293] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [295] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [297] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [299] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [301] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [303] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [305] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [307] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [309] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [311] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [313] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [315] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [317] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [319] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [321] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [323] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [325] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [327] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [329] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [331] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [333] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [335] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [337] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [339] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [341] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot; 
+## [343] &quot;Chinstrap_Dream&quot;  &quot;Chinstrap_Dream&quot;</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>A Little Light Plotting 3a. Show the distribution of flipper_length_mm by species and island using boxplots. For one point of extra credit, redo creating the species_island column with the sep as instead of _. What does do? You will find it very handy in the future.</li>
 </ol>
@@ -2331,20 +2514,22 @@ plot(avg_flip ~ avg_mass, data = avg_mass_flip)</code></pre>
 <li>Let’s get ready to simulate 4a. Grab the values for bill_length_mm for Gentoo penguins in Biscoe Island and put it into an object. Note, the dplyr function pull() is kinda cool, as if you apply it to a data frame, it will pull out a vector from a column of interest. Try 21, 21, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4, 17.3, 15.2, 10.4, 10.4, 14.7, 32.4, 30.4, 33.9, 21.5, 15.5, 15.2, 13.3, 19.2, 27.3, 26, 30.4, 15.8, 19.7, 15, 21.4. Kinda cool. Might help you here.</li>
 </ol>
 <pre class="r"><code>#create object for bill length of gentoo from bisco
-gent_biscoe_bill &lt;- penguins %&gt;%
+gent_biscoe_bill &lt;- na.omit(penguins) %&gt;%
   filter(species == &quot;Gentoo&quot; &amp; island == &quot;Biscoe&quot;) %&gt;%
   pull(bill_length_mm)
 
 gent_biscoe_bill</code></pre>
-<pre><code>##   [1] 46.1 50.0 48.7 50.0 47.6 46.5 45.4 46.7 43.3 46.8 40.9 49.0 45.5 48.4 45.8
-##  [16] 49.3 42.0 49.2 46.2 48.7 50.2 45.1 46.5 46.3 42.9 46.1 44.5 47.8 48.2 50.0
-##  [31] 47.3 42.8 45.1 59.6 49.1 48.4 42.6 44.4 44.0 48.7 42.7 49.6 45.3 49.6 50.5
-##  [46] 43.6 45.5 50.5 44.9 45.2 46.6 48.5 45.1 50.1 46.5 45.0 43.8 45.5 43.2 50.4
-##  [61] 45.3 46.2 45.7 54.3 45.8 49.8 46.2 49.5 43.5 50.7 47.7 46.4 48.2 46.5 46.4
-##  [76] 48.6 47.5 51.1 45.2 45.2 49.1 52.5 47.4 50.0 44.9 50.8 43.4 51.3 47.5 52.1
-##  [91] 47.5 52.2 45.5 49.5 44.5 50.8 49.4 46.9 48.4 51.1 48.5 55.9 47.2 49.1 47.3
-## [106] 46.8 41.7 53.4 43.3 48.1 50.5 49.8 43.5 51.5 46.2 55.1 44.5 48.8 47.2   NA
-## [121] 46.8 50.4 45.2 49.9</code></pre>
+<pre><code>##   [1] 46.1 50.0 48.7 50.0 47.6 46.5 45.4 46.7 43.3 46.8 40.9
+##  [12] 49.0 45.5 48.4 45.8 49.3 42.0 49.2 46.2 48.7 50.2 45.1
+##  [23] 46.5 46.3 42.9 46.1 47.8 48.2 50.0 47.3 42.8 45.1 59.6
+##  [34] 49.1 48.4 42.6 44.4 44.0 48.7 42.7 49.6 45.3 49.6 50.5
+##  [45] 43.6 45.5 50.5 44.9 45.2 46.6 48.5 45.1 50.1 46.5 45.0
+##  [56] 43.8 45.5 43.2 50.4 45.3 46.2 45.7 54.3 45.8 49.8 49.5
+##  [67] 43.5 50.7 47.7 46.4 48.2 46.5 46.4 48.6 47.5 51.1 45.2
+##  [78] 45.2 49.1 52.5 47.4 50.0 44.9 50.8 43.4 51.3 47.5 52.1
+##  [89] 47.5 52.2 45.5 49.5 44.5 50.8 49.4 46.9 48.4 51.1 48.5
+## [100] 55.9 47.2 49.1 46.8 41.7 53.4 43.3 48.1 50.5 49.8 43.5
+## [111] 51.5 46.2 55.1 48.8 47.2 46.8 50.4 45.2 49.9</code></pre>
 <p>4b. Use replicate() to calculate the standard error of the mean 10 times. Use a formula! Don’t forget that NA values shouldn’t be included!</p>
 <pre class="r"><code>gentoo_bill_se_mean &lt;- replicate(10,
                       sample(na.omit(gent_biscoe_bill), 
@@ -2352,159 +2537,120 @@ gent_biscoe_bill</code></pre>
                              replace = TRUE) %&gt;% mean)
 
 gentoo_bill_se_mean</code></pre>
-<pre><code>##  [1] 47.77177 47.20323 47.25484 47.91694 47.10161 47.31290 47.76371 47.68387
-##  [9] 47.41613 47.54032</code></pre>
+<pre><code>##  [1] 47.50336 47.54958 47.83277 47.92857 47.74958 47.57563
+##  [7] 48.16975 47.52521 47.83277 47.76471</code></pre>
 <p>4c. Use map_df() to create a data frame with the mean and sd of different sample sizes using the first 5 through 100 values (so, n = 5:100 - smallest sample size will have the values 1-5). Make sure the sample size is included in the final data frame.</p>
 <pre class="r"><code>library(purrr)
-
-
-
-#map gentoo bill from biscoe values into mean and sd
-df_samp_mean_sd &lt;- map_df(sample(gent_biscoe_bill,
-                   size = length(gent_biscoe_bill),
-                   replace = TRUE),
-#create a df with sample size, mean and sd                        
-       ~data.frame(x = .x,
-                   mean = mean(5:.x),
-                   sd = sd(5:.x)),
-                   
-                      
-       .id = &quot;x&quot;)
-
-df_samp_mean_sd</code></pre>
-<pre><code>##       x mean       sd
-## 1     1 28.0 13.71131
-## 2     2 24.5 11.69045
-## 3     3 27.0 13.13393
-## 4     4 26.5 12.84523
-## 5     5 26.0 12.55654
-## 6     6 25.0 11.97915
-## 7     7 26.0 12.55654
-## 8     8 25.5 12.26784
-## 9     9 23.5 11.11306
-## 10   10 27.5 13.42262
-## 11   11 23.5 11.11306
-## 12   12 25.5 12.26784
-## 13   13 25.0 11.97915
-## 14   14 25.0 11.97915
-## 15   15 24.0 11.40175
-## 16   16 25.5 12.26784
-## 17   17 26.0 12.55654
-## 18   18 25.0 11.97915
-## 19   19 27.0 13.13393
-## 20   20 27.5 13.42262
-## 21   21 26.0 12.55654
-## 22   22 25.5 12.26784
-## 23   23 27.5 13.42262
-## 24   24 26.0 12.55654
-## 25   25 27.5 13.42262
-## 26   26 25.0 11.97915
-## 27   27 27.5 13.42262
-## 28   28 28.0 13.71131
-## 29   29 25.5 12.26784
-## 30   30 27.5 13.42262
-## 31   31 27.5 13.42262
-## 32   32 25.5 12.26784
-## 33   33 26.5 12.84523
-## 34   34 26.5 12.84523
-## 35   35 24.5 11.69045
-## 36   36 23.5 11.11306
-## 37   37 24.5 11.69045
-## 38   38 26.5 12.84523
-## 39   39 28.0 13.71131
-## 40   40 25.5 12.26784
-## 41   41 32.0 16.02082
-## 42   42 24.0 11.40175
-## 43   43 26.5 12.84523
-## 44   44 26.5 12.84523
-## 45   45 25.5 12.26784
-## 46   46 28.0 13.71131
-## 47   47 25.0 11.97915
-## 48   48 26.5 12.84523
-## 49   49 27.0 13.13393
-## 50   50 27.0 13.13393
-## 51   51 24.0 11.40175
-## 52   52 27.5 13.42262
-## 53   53 25.5 12.26784
-## 54   54 27.5 13.42262
-## 55   55 27.5 13.42262
-## 56   56 26.5 12.84523
-## 57   57 26.5 12.84523
-## 58   58 26.5 12.84523
-## 59   59 26.5 12.84523
-## 60   60 27.0 13.13393
-## 61   61 25.5 12.26784
-## 62   62 25.5 12.26784
-## 63   63 27.5 13.42262
-## 64   64 28.0 13.71131
-## 65   65 25.5 12.26784
-## 66   66 27.0 13.13393
-## 67   67 23.5 11.11306
-## 68   68 26.5 12.84523
-## 69   69 26.0 12.55654
-## 70   70 26.5 12.84523
-## 71   71 25.5 12.26784
-## 72   72 26.5 12.84523
-## 73   73 25.0 11.97915
-## 74   74 27.5 13.42262
-## 75   75 24.0 11.40175
-## 76   76 27.0 13.13393
-## 77   77 25.5 12.26784
-## 78   78 27.0 13.13393
-## 79   79 25.5 12.26784
-## 80   80 27.5 13.42262
-## 81   81 26.0 12.55654
-## 82   82 26.5 12.84523
-## 83   83 24.5 11.69045
-## 84   84 28.0 13.71131
-## 85   85 26.0 12.55654
-## 86   86 27.0 13.13393
-## 87   87 25.5 12.26784
-## 88   88 23.5 11.11306
-## 89   89 30.0 14.86607
-## 90   90 25.5 12.26784
-## 91   91 25.5 12.26784
-## 92   92 23.5 11.11306
-## 93   93 26.5 12.84523
-## 94   94 24.5 11.69045
-## 95   95 26.5 12.84523
-## 96   96 29.0 14.28869
-## 97   97 26.5 12.84523
-## 98   98 25.5 12.26784
-## 99   99 25.5 12.26784
-## 100 100 27.0 13.13393
-## 101 101 26.5 12.84523
-## 102 102 25.5 12.26784
-## 103 103 27.0 13.13393
-## 104 104 25.5 12.26784
-## 105 105 26.5 12.84523
-## 106 106 26.0 12.55654
-## 107 107 29.0 14.28869
-## 108 108 25.5 12.26784
-## 109 109 27.5 13.42262
-## 110 110 30.0 14.86607
-## 111 111 23.0 10.82436
-## 112 112 27.0 13.13393
-## 113 113 26.0 12.55654
-## 114 114 25.5 12.26784
-## 115 115 26.0 12.55654
-## 116 116 25.0 11.97915
-## 117 117 28.0 13.71131
-## 118 118 27.0 13.13393
-## 119 119 24.0 11.40175
-## 120 120 28.5 14.00000
-## 121 121 25.0 11.97915
-## 122 122 27.5 13.42262
-## 123 123 27.5 13.42262
-## 124 124 26.5 12.84523</code></pre>
+gentdf &lt;- map_df(5:100,
+            ~data.frame(sim = .x,
+                     samp_mean =  mean(gent_biscoe_bill[5:.x]),
+                               samp_sd =  sd(gent_biscoe_bill[5:.x])))
+gentdf</code></pre>
+<pre><code>##    sim samp_mean   samp_sd
+## 1    5  47.60000        NA
+## 2    6  47.05000 0.7778175
+## 3    7  46.50000 1.1000000
+## 4    8  46.55000 0.9036961
+## 5    9  45.90000 1.6507574
+## 6   10  46.05000 1.5215124
+## 7   11  45.31429 2.3912539
+## 8   12  45.77500 2.5689075
+## 9   13  45.74444 2.4047407
+## 10  14  46.01000 2.4177354
+## 11  15  45.99091 2.2945390
+## 12  16  46.26667 2.3872134
+## 13  17  45.93846 2.5737581
+## 14  18  46.17143 2.6219278
+## 15  19  46.17333 2.5265636
+## 16  20  46.33125 2.5213009
+## 17  21  46.55882 2.6153534
+## 18  22  46.47778 2.5604585
+## 19  23  46.47895 2.4883236
+## 20  24  46.47000 2.4222869
+## 21  25  46.30000 2.4861617
+## 22  26  46.29091 2.4266200
+## 23  27  46.35652 2.3916191
+## 24  28  46.43333 2.3691251
+## 25  29  46.57600 2.4264652
+## 26  30  46.60385 2.3816768
+## 27  31  46.46296 2.4474709
+## 28  32  46.41429 2.4154923
+## 29  33  46.86897 3.4090325
+## 30  34  46.94333 3.3744152
+## 31  35  46.99032 3.3279979
+## 32  36  46.85312 3.3646151
+## 33  37  46.77879 3.3390453
+## 34  38  46.69706 3.3224202
+## 35  39  46.75429 3.2906590
+## 36  40  46.64167 3.3129508
+## 37  41  46.72162 3.3026198
+## 38  42  46.68421 3.2658368
+## 39  43  46.75897 3.2562263
+## 40  44  46.85250 3.2681829
+## 41  45  46.77317 3.2668046
+## 42  46  46.74286 3.2326945
+## 43  47  46.83023 3.2449620
+## 44  48  46.78636 3.2201828
+## 45  49  46.75111 3.1921510
+## 46  50  46.74783 3.1565621
+## 47  51  46.78511 3.1325069
+## 48  52  46.75000 3.1085332
+## 49  53  46.81837 3.1129885
+## 50  54  46.81200 3.0813885
+## 51  55  46.77647 3.0609533
+## 52  56  46.71923 3.0587732
+## 53  57  46.69623 3.0338451
+## 54  58  46.63148 3.0425178
+## 55  59  46.70000 3.0567472
+## 56  60  46.67500 3.0346035
+## 57  61  46.66667 3.0080448
+## 58  62  46.65000 2.9842422
+## 59  63  46.77966 3.1215480
+## 60  64  46.76333 3.0975642
+## 61  65  46.81311 3.0961522
+## 62  66  46.85645 3.0895711
+## 63  67  46.80317 3.0935921
+## 64  68  46.86406 3.1073577
+## 65  69  46.87692 3.0847290
+## 66  70  46.86970 3.0614712
+## 67  71  46.88955 3.0425335
+## 68  72  46.88382 3.0201122
+## 69  73  46.87681 2.9983890
+## 70  74  46.90143 2.9836993
+## 71  75  46.90986 2.9631622
+## 72  76  46.96806 2.9833730
+## 73  77  46.94384 2.9698011
+## 74  78  46.92027 2.9563482
+## 75  79  46.94933 2.9470725
+## 76  80  47.02237 2.9958014
+## 77  81  47.02727 2.9763381
+## 78  82  47.06538 2.9760440
+## 79  83  47.03797 2.9669247
+## 80  84  47.08500 2.9779400
+## 81  85  47.03951 2.9874604
+## 82  86  47.09146 3.0060105
+## 83  87  47.09639 2.9879614
+## 84  88  47.15595 3.0196685
+## 85  89  47.16000 3.0018724
+## 86  90  47.21860 3.0332476
+## 87  91  47.19885 3.0211847
+## 88  92  47.22500 3.0137711
+## 89  93  47.19438 3.0104877
+## 90  94  47.23444 3.0175577
+## 91  95  47.25824 3.0093213
+## 92  96  47.25435 2.9929739
+## 93  97  47.26667 2.9790330
+## 94  98  47.30745 2.9892366
+## 95  99  47.32000 2.9758103
+## 96 100  47.40937 3.0869190</code></pre>
 <p>4d. Plot the relationship between sample size and SD and sample size versus SE of the mean. What difference do you see and why? Note, you’ll need to create a column for SE here!</p>
 <p>+2 EC for using par() to make a two-panel plot. Don’t forget to reset back to a single plot per panel after making a two-panel plot. Otherwise things get weird.</p>
 <p>Extra Credit. Making beautiful tables is hard. There are a number of good packages to help you do that - and they were recently featured in this excellent article - <a href="https://rfortherestofus.com/2019/11/how-to-make-beautiful-tables-in-r/" class="uri">https://rfortherestofus.com/2019/11/how-to-make-beautiful-tables-in-r/</a>. Make a beautiful table showing the average properties of bills of penguins by species, sex, and island. Use whatever package you like. A basic nice table is worth 4 points. +1 for every additional bit of information you can convey with the table other than a nicely formatted table. Please explain what you have done to get each point. +1 for naturally incorporating each additional piece of information about properties beyond means. How visually appealing can you make this?</p>
 <pre class="r"><code>library(reactable)
 
 reactable(penguins)</code></pre>
-<div id="htmlwidget-03d1f4da30d81cdf2c8c" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-03d1f4da30d81cdf2c8c">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"species":["Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap"],"island":["Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream"],"bill_length_mm":[39.1,39.5,40.3,"NA",36.7,39.3,38.9,39.2,34.1,42,37.8,37.8,41.1,38.6,34.6,36.6,38.7,42.5,34.4,46,37.8,37.7,35.9,38.2,38.8,35.3,40.6,40.5,37.9,40.5,39.5,37.2,39.5,40.9,36.4,39.2,38.8,42.2,37.6,39.8,36.5,40.8,36,44.1,37,39.6,41.1,37.5,36,42.3,39.6,40.1,35,42,34.5,41.4,39,40.6,36.5,37.6,35.7,41.3,37.6,41.1,36.4,41.6,35.5,41.1,35.9,41.8,33.5,39.7,39.6,45.8,35.5,42.8,40.9,37.2,36.2,42.1,34.6,42.9,36.7,35.1,37.3,41.3,36.3,36.9,38.3,38.9,35.7,41.1,34,39.6,36.2,40.8,38.1,40.3,33.1,43.2,35,41,37.7,37.8,37.9,39.7,38.6,38.2,38.1,43.2,38.1,45.6,39.7,42.2,39.6,42.7,38.6,37.3,35.7,41.1,36.2,37.7,40.2,41.4,35.2,40.6,38.8,41.5,39,44.1,38.5,43.1,36.8,37.5,38.1,41.1,35.6,40.2,37,39.7,40.2,40.6,32.1,40.7,37.3,39,39.2,36.6,36,37.8,36,41.5,46.1,50,48.7,50,47.6,46.5,45.4,46.7,43.3,46.8,40.9,49,45.5,48.4,45.8,49.3,42,49.2,46.2,48.7,50.2,45.1,46.5,46.3,42.9,46.1,44.5,47.8,48.2,50,47.3,42.8,45.1,59.6,49.1,48.4,42.6,44.4,44,48.7,42.7,49.6,45.3,49.6,50.5,43.6,45.5,50.5,44.9,45.2,46.6,48.5,45.1,50.1,46.5,45,43.8,45.5,43.2,50.4,45.3,46.2,45.7,54.3,45.8,49.8,46.2,49.5,43.5,50.7,47.7,46.4,48.2,46.5,46.4,48.6,47.5,51.1,45.2,45.2,49.1,52.5,47.4,50,44.9,50.8,43.4,51.3,47.5,52.1,47.5,52.2,45.5,49.5,44.5,50.8,49.4,46.9,48.4,51.1,48.5,55.9,47.2,49.1,47.3,46.8,41.7,53.4,43.3,48.1,50.5,49.8,43.5,51.5,46.2,55.1,44.5,48.8,47.2,"NA",46.8,50.4,45.2,49.9,46.5,50,51.3,45.4,52.7,45.2,46.1,51.3,46,51.3,46.6,51.7,47,52,45.9,50.5,50.3,58,46.4,49.2,42.4,48.5,43.2,50.6,46.7,52,50.5,49.5,46.4,52.8,40.9,54.2,42.5,51,49.7,47.5,47.6,52,46.9,53.5,49,46.2,50.9,45.5,50.9,50.8,50.1,49,51.5,49.8,48.1,51.4,45.7,50.7,42.5,52.2,45.2,49.3,50.2,45.6,51.9,46.8,45.7,55.8,43.5,49.6,50.8,50.2],"bill_depth_mm":[18.7,17.4,18,"NA",19.3,20.6,17.8,19.6,18.1,20.2,17.1,17.3,17.6,21.2,21.1,17.8,19,20.7,18.4,21.5,18.3,18.7,19.2,18.1,17.2,18.9,18.6,17.9,18.6,18.9,16.7,18.1,17.8,18.9,17,21.1,20,18.5,19.3,19.1,18,18.4,18.5,19.7,16.9,18.8,19,18.9,17.9,21.2,17.7,18.9,17.9,19.5,18.1,18.6,17.5,18.8,16.6,19.1,16.9,21.1,17,18.2,17.1,18,16.2,19.1,16.6,19.4,19,18.4,17.2,18.9,17.5,18.5,16.8,19.4,16.1,19.1,17.2,17.6,18.8,19.4,17.8,20.3,19.5,18.6,19.2,18.8,18,18.1,17.1,18.1,17.3,18.9,18.6,18.5,16.1,18.5,17.9,20,16,20,18.6,18.9,17.2,20,17,19,16.5,20.3,17.7,19.5,20.7,18.3,17,20.5,17,18.6,17.2,19.8,17,18.5,15.9,19,17.6,18.3,17.1,18,17.9,19.2,18.5,18.5,17.6,17.5,17.5,20.1,16.5,17.9,17.1,17.2,15.5,17,16.8,18.7,18.6,18.4,17.8,18.1,17.1,18.5,13.2,16.3,14.1,15.2,14.5,13.5,14.6,15.3,13.4,15.4,13.7,16.1,13.7,14.6,14.6,15.7,13.5,15.2,14.5,15.1,14.3,14.5,14.5,15.8,13.1,15.1,14.3,15,14.3,15.3,15.3,14.2,14.5,17,14.8,16.3,13.7,17.3,13.6,15.7,13.7,16,13.7,15,15.9,13.9,13.9,15.9,13.3,15.8,14.2,14.1,14.4,15,14.4,15.4,13.9,15,14.5,15.3,13.8,14.9,13.9,15.7,14.2,16.8,14.4,16.2,14.2,15,15,15.6,15.6,14.8,15,16,14.2,16.3,13.8,16.4,14.5,15.6,14.6,15.9,13.8,17.3,14.4,14.2,14,17,15,17.1,14.5,16.1,14.7,15.7,15.8,14.6,14.4,16.5,15,17,15.5,15,13.8,16.1,14.7,15.8,14,15.1,15.2,15.9,15.2,16.3,14.1,16,15.7,16.2,13.7,"NA",14.3,15.7,14.8,16.1,17.9,19.5,19.2,18.7,19.8,17.8,18.2,18.2,18.9,19.9,17.8,20.3,17.3,18.1,17.1,19.6,20,17.8,18.6,18.2,17.3,17.5,16.6,19.4,17.9,19,18.4,19,17.8,20,16.6,20.8,16.7,18.8,18.6,16.8,18.3,20.7,16.6,19.9,19.5,17.5,19.1,17,17.9,18.5,17.9,19.6,18.7,17.3,16.4,19,17.3,19.7,17.3,18.8,16.6,19.9,18.8,19.4,19.5,16.5,17,19.8,18.1,18.2,19,18.7],"flipper_length_mm":[181,186,195,"NA",193,190,181,195,193,190,186,180,182,191,198,185,195,197,184,194,174,180,189,185,180,187,183,187,172,180,178,178,188,184,195,196,190,180,181,184,182,195,186,196,185,190,182,179,190,191,186,188,190,200,187,191,186,193,181,194,185,195,185,192,184,192,195,188,190,198,190,190,196,197,190,195,191,184,187,195,189,196,187,193,191,194,190,189,189,190,202,205,185,186,187,208,190,196,178,192,192,203,183,190,193,184,199,190,181,197,198,191,193,197,191,196,188,199,189,189,187,198,176,202,186,199,191,195,191,210,190,197,193,199,187,190,191,200,185,193,193,187,188,190,192,185,190,184,195,193,187,201,211,230,210,218,215,210,211,219,209,215,214,216,214,213,210,217,210,221,209,222,218,215,213,215,215,215,216,215,210,220,222,209,207,230,220,220,213,219,208,208,208,225,210,216,222,217,210,225,213,215,210,220,210,225,217,220,208,220,208,224,208,221,214,231,219,230,214,229,220,223,216,221,221,217,216,230,209,220,215,223,212,221,212,224,212,228,218,218,212,230,218,228,212,224,214,226,216,222,203,225,219,228,215,228,216,215,210,219,208,209,216,229,213,230,217,230,217,222,214,"NA",215,222,212,213,192,196,193,188,197,198,178,197,195,198,193,194,185,201,190,201,197,181,190,195,181,191,187,193,195,197,200,200,191,205,187,201,187,203,195,199,195,210,192,205,210,187,196,196,196,201,190,212,187,198,199,201,193,203,187,197,191,203,202,194,206,189,195,207,202,193,210,198],"body_mass_g":[3750,3800,3250,"NA",3450,3650,3625,4675,3475,4250,3300,3700,3200,3800,4400,3700,3450,4500,3325,4200,3400,3600,3800,3950,3800,3800,3550,3200,3150,3950,3250,3900,3300,3900,3325,4150,3950,3550,3300,4650,3150,3900,3100,4400,3000,4600,3425,2975,3450,4150,3500,4300,3450,4050,2900,3700,3550,3800,2850,3750,3150,4400,3600,4050,2850,3950,3350,4100,3050,4450,3600,3900,3550,4150,3700,4250,3700,3900,3550,4000,3200,4700,3800,4200,3350,3550,3800,3500,3950,3600,3550,4300,3400,4450,3300,4300,3700,4350,2900,4100,3725,4725,3075,4250,2925,3550,3750,3900,3175,4775,3825,4600,3200,4275,3900,4075,2900,3775,3350,3325,3150,3500,3450,3875,3050,4000,3275,4300,3050,4000,3325,3500,3500,4475,3425,3900,3175,3975,3400,4250,3400,3475,3050,3725,3000,3650,4250,3475,3450,3750,3700,4000,4500,5700,4450,5700,5400,4550,4800,5200,4400,5150,4650,5550,4650,5850,4200,5850,4150,6300,4800,5350,5700,5000,4400,5050,5000,5100,4100,5650,4600,5550,5250,4700,5050,6050,5150,5400,4950,5250,4350,5350,3950,5700,4300,4750,5550,4900,4200,5400,5100,5300,4850,5300,4400,5000,4900,5050,4300,5000,4450,5550,4200,5300,4400,5650,4700,5700,4650,5800,4700,5550,4750,5000,5100,5200,4700,5800,4600,6000,4750,5950,4625,5450,4725,5350,4750,5600,4600,5300,4875,5550,4950,5400,4750,5650,4850,5200,4925,4875,4625,5250,4850,5600,4975,5500,4725,5500,4700,5500,4575,5500,5000,5950,4650,5500,4375,5850,4875,6000,4925,"NA",4850,5750,5200,5400,3500,3900,3650,3525,3725,3950,3250,3750,4150,3700,3800,3775,3700,4050,3575,4050,3300,3700,3450,4400,3600,3400,2900,3800,3300,4150,3400,3800,3700,4550,3200,4300,3350,4100,3600,3900,3850,4800,2700,4500,3950,3650,3550,3500,3675,4450,3400,4300,3250,3675,3325,3950,3600,4050,3350,3450,3250,4050,3800,3525,3950,3650,3650,4000,3400,3775,4100,3775],"sex":["male","female","female",null,"female","male","female","male",null,null,null,null,"female","male","male","female","female","male","female","male","female","male","female","male","male","female","male","female","female","male","female","male","female","male","female","male","male","female","female","male","female","male","female","male","female","male","male",null,"female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","male","female","male","female","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","male","female","female","male","female","male","female","male","female","male","male","female","female","male","female","male","female","male","female","male","female","male","female","male","female","male","male","female","female","male","female","male",null,"male","female","male","male","female","female","male","female","male","female","male","female","male","female","male","female","male","male","female","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male",null,"male","female","male","female","male","male","female","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","male","female","female","male","female","male","female","male",null,"male","female","male","female","male","female","male","female","male","female","male",null,"male","female",null,"female","male","female","male","female","male","male","female","male","female","female","male","female","male","female","male","female","male","female","male","male","female","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","male","female","female","male","female","male","male","female","male","female","female","male","female","male","male","female","female","male","female","male","female","male","female","male","male","female","male","female","female","male","female","male","male","female"],"year":[2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009],"Species_Island":["Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream"]},"columns":[{"accessor":"species","name":"species","type":"factor"},{"accessor":"island","name":"island","type":"factor"},{"accessor":"bill_length_mm","name":"bill_length_mm","type":"numeric"},{"accessor":"bill_depth_mm","name":"bill_depth_mm","type":"numeric"},{"accessor":"flipper_length_mm","name":"flipper_length_mm","type":"numeric"},{"accessor":"body_mass_g","name":"body_mass_g","type":"numeric"},{"accessor":"sex","name":"sex","type":"factor"},{"accessor":"year","name":"year","type":"numeric"},{"accessor":"Species_Island","name":"Species_Island","type":"character"}],"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"99b40c42f8d0d4923cfc5277762086bf","key":"99b40c42f8d0d4923cfc5277762086bf"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-99c24b34b3718a95308e" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-99c24b34b3718a95308e">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"species":["Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap"],"island":["Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream"],"bill_length_mm":[39.1,39.5,40.3,"NA",36.7,39.3,38.9,39.2,34.1,42,37.8,37.8,41.1,38.6,34.6,36.6,38.7,42.5,34.4,46,37.8,37.7,35.9,38.2,38.8,35.3,40.6,40.5,37.9,40.5,39.5,37.2,39.5,40.9,36.4,39.2,38.8,42.2,37.6,39.8,36.5,40.8,36,44.1,37,39.6,41.1,37.5,36,42.3,39.6,40.1,35,42,34.5,41.4,39,40.6,36.5,37.6,35.7,41.3,37.6,41.1,36.4,41.6,35.5,41.1,35.9,41.8,33.5,39.7,39.6,45.8,35.5,42.8,40.9,37.2,36.2,42.1,34.6,42.9,36.7,35.1,37.3,41.3,36.3,36.9,38.3,38.9,35.7,41.1,34,39.6,36.2,40.8,38.1,40.3,33.1,43.2,35,41,37.7,37.8,37.9,39.7,38.6,38.2,38.1,43.2,38.1,45.6,39.7,42.2,39.6,42.7,38.6,37.3,35.7,41.1,36.2,37.7,40.2,41.4,35.2,40.6,38.8,41.5,39,44.1,38.5,43.1,36.8,37.5,38.1,41.1,35.6,40.2,37,39.7,40.2,40.6,32.1,40.7,37.3,39,39.2,36.6,36,37.8,36,41.5,46.1,50,48.7,50,47.6,46.5,45.4,46.7,43.3,46.8,40.9,49,45.5,48.4,45.8,49.3,42,49.2,46.2,48.7,50.2,45.1,46.5,46.3,42.9,46.1,44.5,47.8,48.2,50,47.3,42.8,45.1,59.6,49.1,48.4,42.6,44.4,44,48.7,42.7,49.6,45.3,49.6,50.5,43.6,45.5,50.5,44.9,45.2,46.6,48.5,45.1,50.1,46.5,45,43.8,45.5,43.2,50.4,45.3,46.2,45.7,54.3,45.8,49.8,46.2,49.5,43.5,50.7,47.7,46.4,48.2,46.5,46.4,48.6,47.5,51.1,45.2,45.2,49.1,52.5,47.4,50,44.9,50.8,43.4,51.3,47.5,52.1,47.5,52.2,45.5,49.5,44.5,50.8,49.4,46.9,48.4,51.1,48.5,55.9,47.2,49.1,47.3,46.8,41.7,53.4,43.3,48.1,50.5,49.8,43.5,51.5,46.2,55.1,44.5,48.8,47.2,"NA",46.8,50.4,45.2,49.9,46.5,50,51.3,45.4,52.7,45.2,46.1,51.3,46,51.3,46.6,51.7,47,52,45.9,50.5,50.3,58,46.4,49.2,42.4,48.5,43.2,50.6,46.7,52,50.5,49.5,46.4,52.8,40.9,54.2,42.5,51,49.7,47.5,47.6,52,46.9,53.5,49,46.2,50.9,45.5,50.9,50.8,50.1,49,51.5,49.8,48.1,51.4,45.7,50.7,42.5,52.2,45.2,49.3,50.2,45.6,51.9,46.8,45.7,55.8,43.5,49.6,50.8,50.2],"bill_depth_mm":[18.7,17.4,18,"NA",19.3,20.6,17.8,19.6,18.1,20.2,17.1,17.3,17.6,21.2,21.1,17.8,19,20.7,18.4,21.5,18.3,18.7,19.2,18.1,17.2,18.9,18.6,17.9,18.6,18.9,16.7,18.1,17.8,18.9,17,21.1,20,18.5,19.3,19.1,18,18.4,18.5,19.7,16.9,18.8,19,18.9,17.9,21.2,17.7,18.9,17.9,19.5,18.1,18.6,17.5,18.8,16.6,19.1,16.9,21.1,17,18.2,17.1,18,16.2,19.1,16.6,19.4,19,18.4,17.2,18.9,17.5,18.5,16.8,19.4,16.1,19.1,17.2,17.6,18.8,19.4,17.8,20.3,19.5,18.6,19.2,18.8,18,18.1,17.1,18.1,17.3,18.9,18.6,18.5,16.1,18.5,17.9,20,16,20,18.6,18.9,17.2,20,17,19,16.5,20.3,17.7,19.5,20.7,18.3,17,20.5,17,18.6,17.2,19.8,17,18.5,15.9,19,17.6,18.3,17.1,18,17.9,19.2,18.5,18.5,17.6,17.5,17.5,20.1,16.5,17.9,17.1,17.2,15.5,17,16.8,18.7,18.6,18.4,17.8,18.1,17.1,18.5,13.2,16.3,14.1,15.2,14.5,13.5,14.6,15.3,13.4,15.4,13.7,16.1,13.7,14.6,14.6,15.7,13.5,15.2,14.5,15.1,14.3,14.5,14.5,15.8,13.1,15.1,14.3,15,14.3,15.3,15.3,14.2,14.5,17,14.8,16.3,13.7,17.3,13.6,15.7,13.7,16,13.7,15,15.9,13.9,13.9,15.9,13.3,15.8,14.2,14.1,14.4,15,14.4,15.4,13.9,15,14.5,15.3,13.8,14.9,13.9,15.7,14.2,16.8,14.4,16.2,14.2,15,15,15.6,15.6,14.8,15,16,14.2,16.3,13.8,16.4,14.5,15.6,14.6,15.9,13.8,17.3,14.4,14.2,14,17,15,17.1,14.5,16.1,14.7,15.7,15.8,14.6,14.4,16.5,15,17,15.5,15,13.8,16.1,14.7,15.8,14,15.1,15.2,15.9,15.2,16.3,14.1,16,15.7,16.2,13.7,"NA",14.3,15.7,14.8,16.1,17.9,19.5,19.2,18.7,19.8,17.8,18.2,18.2,18.9,19.9,17.8,20.3,17.3,18.1,17.1,19.6,20,17.8,18.6,18.2,17.3,17.5,16.6,19.4,17.9,19,18.4,19,17.8,20,16.6,20.8,16.7,18.8,18.6,16.8,18.3,20.7,16.6,19.9,19.5,17.5,19.1,17,17.9,18.5,17.9,19.6,18.7,17.3,16.4,19,17.3,19.7,17.3,18.8,16.6,19.9,18.8,19.4,19.5,16.5,17,19.8,18.1,18.2,19,18.7],"flipper_length_mm":[181,186,195,"NA",193,190,181,195,193,190,186,180,182,191,198,185,195,197,184,194,174,180,189,185,180,187,183,187,172,180,178,178,188,184,195,196,190,180,181,184,182,195,186,196,185,190,182,179,190,191,186,188,190,200,187,191,186,193,181,194,185,195,185,192,184,192,195,188,190,198,190,190,196,197,190,195,191,184,187,195,189,196,187,193,191,194,190,189,189,190,202,205,185,186,187,208,190,196,178,192,192,203,183,190,193,184,199,190,181,197,198,191,193,197,191,196,188,199,189,189,187,198,176,202,186,199,191,195,191,210,190,197,193,199,187,190,191,200,185,193,193,187,188,190,192,185,190,184,195,193,187,201,211,230,210,218,215,210,211,219,209,215,214,216,214,213,210,217,210,221,209,222,218,215,213,215,215,215,216,215,210,220,222,209,207,230,220,220,213,219,208,208,208,225,210,216,222,217,210,225,213,215,210,220,210,225,217,220,208,220,208,224,208,221,214,231,219,230,214,229,220,223,216,221,221,217,216,230,209,220,215,223,212,221,212,224,212,228,218,218,212,230,218,228,212,224,214,226,216,222,203,225,219,228,215,228,216,215,210,219,208,209,216,229,213,230,217,230,217,222,214,"NA",215,222,212,213,192,196,193,188,197,198,178,197,195,198,193,194,185,201,190,201,197,181,190,195,181,191,187,193,195,197,200,200,191,205,187,201,187,203,195,199,195,210,192,205,210,187,196,196,196,201,190,212,187,198,199,201,193,203,187,197,191,203,202,194,206,189,195,207,202,193,210,198],"body_mass_g":[3750,3800,3250,"NA",3450,3650,3625,4675,3475,4250,3300,3700,3200,3800,4400,3700,3450,4500,3325,4200,3400,3600,3800,3950,3800,3800,3550,3200,3150,3950,3250,3900,3300,3900,3325,4150,3950,3550,3300,4650,3150,3900,3100,4400,3000,4600,3425,2975,3450,4150,3500,4300,3450,4050,2900,3700,3550,3800,2850,3750,3150,4400,3600,4050,2850,3950,3350,4100,3050,4450,3600,3900,3550,4150,3700,4250,3700,3900,3550,4000,3200,4700,3800,4200,3350,3550,3800,3500,3950,3600,3550,4300,3400,4450,3300,4300,3700,4350,2900,4100,3725,4725,3075,4250,2925,3550,3750,3900,3175,4775,3825,4600,3200,4275,3900,4075,2900,3775,3350,3325,3150,3500,3450,3875,3050,4000,3275,4300,3050,4000,3325,3500,3500,4475,3425,3900,3175,3975,3400,4250,3400,3475,3050,3725,3000,3650,4250,3475,3450,3750,3700,4000,4500,5700,4450,5700,5400,4550,4800,5200,4400,5150,4650,5550,4650,5850,4200,5850,4150,6300,4800,5350,5700,5000,4400,5050,5000,5100,4100,5650,4600,5550,5250,4700,5050,6050,5150,5400,4950,5250,4350,5350,3950,5700,4300,4750,5550,4900,4200,5400,5100,5300,4850,5300,4400,5000,4900,5050,4300,5000,4450,5550,4200,5300,4400,5650,4700,5700,4650,5800,4700,5550,4750,5000,5100,5200,4700,5800,4600,6000,4750,5950,4625,5450,4725,5350,4750,5600,4600,5300,4875,5550,4950,5400,4750,5650,4850,5200,4925,4875,4625,5250,4850,5600,4975,5500,4725,5500,4700,5500,4575,5500,5000,5950,4650,5500,4375,5850,4875,6000,4925,"NA",4850,5750,5200,5400,3500,3900,3650,3525,3725,3950,3250,3750,4150,3700,3800,3775,3700,4050,3575,4050,3300,3700,3450,4400,3600,3400,2900,3800,3300,4150,3400,3800,3700,4550,3200,4300,3350,4100,3600,3900,3850,4800,2700,4500,3950,3650,3550,3500,3675,4450,3400,4300,3250,3675,3325,3950,3600,4050,3350,3450,3250,4050,3800,3525,3950,3650,3650,4000,3400,3775,4100,3775],"sex":["male","female","female",null,"female","male","female","male",null,null,null,null,"female","male","male","female","female","male","female","male","female","male","female","male","male","female","male","female","female","male","female","male","female","male","female","male","male","female","female","male","female","male","female","male","female","male","male",null,"female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","male","female","male","female","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","male","female","female","male","female","male","female","male","female","male","male","female","female","male","female","male","female","male","female","male","female","male","female","male","female","male","male","female","female","male","female","male",null,"male","female","male","male","female","female","male","female","male","female","male","female","male","female","male","female","male","male","female","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male",null,"male","female","male","female","male","male","female","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","male","female","female","male","female","male","female","male",null,"male","female","male","female","male","female","male","female","male","female","male",null,"male","female",null,"female","male","female","male","female","male","male","female","male","female","female","male","female","male","female","male","female","male","female","male","male","female","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","male","female","female","male","female","male","male","female","male","female","female","male","female","male","male","female","female","male","female","male","female","male","female","male","male","female","male","female","female","male","female","male","male","female"],"year":[2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009],"Species_Island":["Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nBiscoe","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nTorgersen","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Adelie\nDream","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Gentoo\nBiscoe","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream","Chinstrap\nDream"]},"columns":[{"accessor":"species","name":"species","type":"factor"},{"accessor":"island","name":"island","type":"factor"},{"accessor":"bill_length_mm","name":"bill_length_mm","type":"numeric"},{"accessor":"bill_depth_mm","name":"bill_depth_mm","type":"numeric"},{"accessor":"flipper_length_mm","name":"flipper_length_mm","type":"numeric"},{"accessor":"body_mass_g","name":"body_mass_g","type":"numeric"},{"accessor":"sex","name":"sex","type":"factor"},{"accessor":"year","name":"year","type":"numeric"},{"accessor":"Species_Island","name":"Species_Island","type":"character"}],"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"99b40c42f8d0d4923cfc5277762086bf","key":"99b40c42f8d0d4923cfc5277762086bf"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 <p><a href="https://github.com/rjmaitri/Homework-2.git" class="uri">https://github.com/rjmaitri/Homework-2.git</a></p>
 </div>
 
