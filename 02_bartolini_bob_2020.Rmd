@@ -232,6 +232,7 @@ species_body_mass_sd_median
 
 ```
 
+<span style="color: green;">Biscoe also has a larger median than the entire data set. </span>
 
 #### 2E Make a species-island column in penguins using paste(). This is an awesome function that takes multiple strings, and slams them together using the argument sep = to define how the string should be combined. Try out paste("Hello", "Goodbye", sep = "! ") to see how it works. Have the two be separated by _.
 
@@ -243,6 +244,7 @@ penguins$Species_Island
 
 ```
 
+<span style="color: green;">The paste function concantenated string vectors, which was amended to the data frame. </span>
 
 ## 3. A Little Light Plotting
 #### 3a. Show the distribution of flipper_length_mm by species and island using boxplots. For one point of extra credit, redo creating the species_island column with the sep as \n instead of _. What does \n do? You will find it very handy in the future.
@@ -261,23 +263,30 @@ boxplot(flipper_length_mm ~ Species_Island, data = .)
 
 ```
 
+<span style="color: green;">The boxplot displays the quartiles, medians and outliers for the species as they are on each island. </span>
+
 #### 3b. Show the relationship between average flipper length and average body mass by species and island. What do you see?
 
 ```{r}
 avg_mass_flip <- penguins %>%
-  group_by(Species_Island) %>%
+  group_by(species, island) %>%
   mutate(avg_flip = mean(flipper_length_mm),
          avg_mass = mean(body_mass_g))
 
-plot(avg_flip ~ avg_mass, data = avg_mass_flip)
+plot(avg_flip ~ avg_mass, data = avg_mass_flip, col = "forestgreen")
+
+text(avg_flip ~ avg_mass, labels=Species_Island,data=avg_mass_flip, cex=0.9, font=1, pos = 4)
 
 ```
+
+<span style="color: green;">This plot is frustrating, most of the species/island combinations recieve NA's, I believe it is a problem with NA's in the dataset throwin dplyr from numerical to logical. All I can really gather from this plot is that the Adelie penguins are more rotund on Biscoe than Dream island. </span>
+
 
 #### 3c. Interesting. What if you had made the same plot with the whole dataset? What do you see? Is there anything that could clarify the result any more? Think about it - lots of possible right answers here.
 
 ```{r}
 
-plot(flipper_length_mm ~ body_mass_g, data = penguins)
+plot(flipper_length_mm ~ body_mass_g, data = penguins, col=color_easy)
 
 ```
 
