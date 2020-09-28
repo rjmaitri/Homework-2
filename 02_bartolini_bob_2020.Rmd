@@ -48,6 +48,7 @@ local({
 ```{r}
 #table package
 library(reactable)
+library(RColorBrewer)
 #load the palmerpenguins package
 library(palmerpenguins)
 
@@ -165,7 +166,7 @@ species_body_mass_sd
 
 ```
 
-<span style="color: green;">68% of each species of penguin will vary from the mean by the standard deviation values in this table. </span>
+<span style="color: green;">68% of each species is distributed around the mean by the standard deviation values in this table. </span>
 
 ```{r}
 #create object
@@ -263,7 +264,7 @@ boxplot(flipper_length_mm ~ Species_Island, data = .)
 
 ```
 
-<span style="color: green;">The boxplot displays the quartiles, medians and outliers for the species as they are on each island. </span>
+<span style="color: green;">The boxplot displays the quartiles, medians and outliers for the species as they are on each island. Adelie are the smallest breed, Gentoo the largest. </span>
 
 #### 3b. Show the relationship between average flipper length and average body mass by species and island. What do you see?
 
@@ -273,22 +274,30 @@ avg_mass_flip <- penguins %>%
   mutate(avg_flip = mean(flipper_length_mm),
          avg_mass = mean(body_mass_g))
 
-plot(avg_flip ~ avg_mass, data = avg_mass_flip, col = "forestgreen")
-
+plot(avg_flip ~ avg_mass, data = avg_mass_flip, col = "forestgreen", asp = 500)+
 text(avg_flip ~ avg_mass, labels=Species_Island,data=avg_mass_flip, cex=0.9, font=1, pos = 4)
 
 ```
 
-<span style="color: green;">This plot is frustrating, most of the species/island combinations recieve NA's, I believe it is a problem with NA's in the dataset throwin dplyr from numerical to logical. All I can really gather from this plot is that the Adelie penguins are more rotund on Biscoe than Dream island. </span>
+<span style="color: green;">The Adelie penguins are more rotund on Biscoe than Dream island and Chinstraps are morphologically distinct from the Adelie by a larger flipper length:body mass ratio. </span>
 
 
 #### 3c. Interesting. What if you had made the same plot with the whole dataset? What do you see? Is there anything that could clarify the result any more? Think about it - lots of possible right answers here.
 
 ```{r}
 
-plot(flipper_length_mm ~ body_mass_g, data = penguins, col=color_easy)
+#make the plot colored by specie-island
 
+palette <-  brewer.pal(5, "Dark2")
+
+specie_col <- palette[factor(penguins$Species_Island)]
+
+plot(flipper_length_mm ~ body_mass_g, data = penguins, col = specie_col)
+legend("bottomright", legend = c("Adelie Torgersen", "Adelie Dream", "Chinestrap Dream", "Adelie Biscoe", "Gentoo Biscoe"), fill = palette)
+
+#  legend("bottomright", col = col(5, "Dark2"), c("Adelie Torgersen", "Adelie Dream", "Chinestrap Dream", "Adelie Biscoe", "Gentoo Biscoe"), pch = c("Adelie Torgersen", "Adelie Dream", "Chinestrap Dream", "Adelie Biscoe", "Gentoo Biscoe"))
 ```
+
 
 ## 4. Let’s get ready to simulate
 #### 4a. Grab the values for bill_length_mm for Gentoo penguins in Biscoe Island and put it into an object. Note, the dplyr function pull() is kinda cool, as if you apply it to a data frame, it will pull out a vector from a column of interest. Try 21, 21, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4, 17.3, 15.2, 10.4, 10.4, 14.7, 32.4, 30.4, 33.9, 21.5, 15.5, 15.2, 13.3, 19.2, 27.3, 26, 30.4, 15.8, 19.7, 15, 21.4. Kinda cool. Might help you here.
@@ -303,6 +312,7 @@ gent_biscoe_bill
 
 ```
 
+<span style="color: green;">Wrangled the Gentoo Biscoe Bill length from the data.</span>
 
 #### 4b. Use replicate() to calculate the standard error of the mean 10 times. Use a formula! Don’t forget that NA values shouldn’t be included!
 
@@ -311,14 +321,23 @@ gent_biscoe_bill
 gentoo_bill_se_mean <- replicate(10,
                       sample(na.omit(gent_biscoe_bill), 
                              size = length(gent_biscoe_bill),
-                             replace = TRUE) %>% mean)
+                             replace = TRUE) %>% mean) 
+gentoo_bill_se_mean
+
+```
+
+<span style="color: green;">The mean was calculated 10 times with sampling and replacement. </span>
+
+```{r}
+
 #calculate SE
-sd(gentoo_bill_se_mean)/sqrt(length(gentoo_bill_se_mean))
+sd(c(gentoo_bill_se_mean))/sqrt(c(gentoo_bill_se_mean))
 
 
 
 ```
 
+<span style="color: green;">The standard error of the mean calculated ten times. </span>
 
 #### 4c. Use map_df() to create a data frame with the mean and sd of different sample sizes using the first 5 through 100 values (so, n = 5:100 - smallest sample size will have the values 1-5). Make sure the sample size is included in the final data frame.
 
@@ -326,6 +345,7 @@ sd(gentoo_bill_se_mean)/sqrt(length(gentoo_bill_se_mean))
 ```{r, max.height = '150px'}
 
 library(purrr)
+#sample and replace the first five through 100 of the Bill data
 gentdf <- map_df(5:100,
             ~data.frame(sample_size = .x,
                      samp_mean =  mean(gent_biscoe_bill[5:.x]),
@@ -355,7 +375,7 @@ gentoo_bill_ster_mean <- replicate(96,
                              replace = TRUE) %>% mean)
 
 #Create a column for SE
-gentdf$SE_mean <- sd(gentoo_bill_ster_mean)/sqrt(length(gentoo_bill_ster_mean))
+gentdf$SE_mean <- sd(c(gentoo_bill_ster_mean))/sqrt(c(gentoo_bill_ster_mean))
 
 #plot samp_size vs. SE of the mean
 
@@ -363,7 +383,7 @@ plot(~sample_size + SE_mean, data = gentdf)
 
 ```
 
-
+<span style="color: green;">The plot depicts a SE of mean which is relatively stable across the sample sizes.</span> 
 
 Extra Credit.
 Making beautiful tables is hard. There are a number of good packages to help you do that - and they were recently featured in this excellent article - https://rfortherestofus.com/2019/11/how-to-make-beautiful-tables-in-r/. Make a beautiful table showing the average properties of bills of penguins by species, sex, and island. Use whatever package you like. A basic nice table is worth 4 points. +1 for every additional bit of information you can convey with the table other than a nicely formatted table. Please explain what you have done to get each point. +1 for naturally incorporating each additional piece of information about properties beyond means. How visually appealing can you make this?
