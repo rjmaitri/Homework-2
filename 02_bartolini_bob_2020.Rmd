@@ -21,6 +21,8 @@ output: html_document
 
 ---
 
+https://github.com/rjmaitri/Homework-2.git
+
 ```{r setup, include=FALSE}
 #scrolling code output
 knitr::opts_chunk$set(
