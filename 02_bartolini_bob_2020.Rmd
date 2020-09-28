@@ -337,7 +337,7 @@ sd(c(gentoo_bill_se_mean))/sqrt(c(gentoo_bill_se_mean))
 
 ```
 
-<span style="color: green;">The standard error of the mean calculated ten times. </span>
+<span style="color: green;">The standard error of the mean calculated ten times has a narrow range. </span>
 
 #### 4c. Use map_df() to create a data frame with the mean and sd of different sample sizes using the first 5 through 100 values (so, n = 5:100 - smallest sample size will have the values 1-5). Make sure the sample size is included in the final data frame.
 
@@ -354,7 +354,7 @@ reactable(gentdf)
 
 ```
 
-
+<span style="color: green;">Our table looks to be correct since the first sample size contains the mean of the first 5 values.</span>
 
 #### 4d. Plot the relationship between sample size and SD and sample size versus SE of the mean. What difference do you see and why? Note, you’ll need to create a column for SE here!
 
@@ -365,7 +365,7 @@ plot(~sample_size + samp_sd,  data = gentdf)
 
 ```
 
-
+<span style="color: green;">The std deviation is trending downwards as sample size increases, as indicated by the central limit theorem.</span>
 
 ```{r}
 #Bootstrap the SE of the means
@@ -389,7 +389,18 @@ Extra Credit.
 Making beautiful tables is hard. There are a number of good packages to help you do that - and they were recently featured in this excellent article - https://rfortherestofus.com/2019/11/how-to-make-beautiful-tables-in-r/. Make a beautiful table showing the average properties of bills of penguins by species, sex, and island. Use whatever package you like. A basic nice table is worth 4 points. +1 for every additional bit of information you can convey with the table other than a nicely formatted table. Please explain what you have done to get each point. +1 for naturally incorporating each additional piece of information about properties beyond means. How visually appealing can you make this?
 
 ```{r}
-reactable(penguins)
+#create object
+AVGssi <- penguins %>%
+#group by species
+  group_by(species, island, sex) %>%
+#summarize median
+  summarize(flipper_mean = mean(flipper_length_mm, na.rm = TRUE),
+            bill_length_mean = mean(bill_length_mm, na.rm = TRUE),
+            bill_depth_mean = mean(bill_depth_mm, na.rm = TRUE),
+            body_mass_mean = mean(body_mass_g, na.rm = TRUE))
+
+#apply function reactable to AVGssi df
+reactable(AVGssi)
 ```
 
 https://github.com/rjmaitri/Homework-2.git
